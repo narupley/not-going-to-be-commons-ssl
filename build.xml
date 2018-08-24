@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project name="not-going-to-be-commons-ssl" basedir="." default="dist">
+	
+	<target name="init">
+		<property file="build.properties" />
+
+		<path id="classpath">
+			<fileset dir="lib" includes="**/*.jar" />
+		</path>
+	</target>
+	
+	<target name="clean" depends="init">
+		<delete dir="classes" />
+		<delete dir="javadocs"/>
+		<delete dir="dist" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="classes/main/java" />
+		
+		<javac srcdir="src/main/java" destdir="classes/main/java" debug="on" includeAntRuntime="false">
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<target name="build" depends="compile">
+		<mkdir dir="dist" />
+		
+		<jar destfile="dist/not-going-to-be-commons-ssl-${version}.jar" basedir="classes/main/java">
+			<metainf dir="${basedir}">
+				<include name="LICENSE" />
+				<include name="NOTICE" />
+			</metainf>
+			<manifest>
+				<attribute name="Implementation-Title" value="Not-Going-To-Be-Commons-SSL" />
+				<attribute name="Implementation-URL" value="https://github.com/narupley/not-going-to-be-commons-ssl" />
+				<attribute name="Implementation-Version" value="${version}" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="dist" depends="build, javadocs, test-run" />
+	
+	<target name="javadocs" depends="init" description="Generates javadocs.">
+		<mkdir dir="javadocs"/>
+		
+		<javadoc sourcepath="src/main/java" destdir="javadocs" packagenames="*" classpathref="classpath" access="private" source="yes" linksource="yes">
+			<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+			<link href="http://java.sun.com/j2ee/1.4/docs/api/"/>
+			<link href="http://jakarta.apache.org/commons/httpclient/apidocs/"/>
+		</javadoc>
+	</target>
+	
+	<target name="test-init" depends="init">
+		<delete dir="classes/test/java" />
+		<delete dir="junit-reports" />
+		
+		<path id="testclasspath">
+			<fileset dir="testlib" includes="**/*.jar" />
+			<dirset dir="classes/main/java"/>
+			<path refid="classpath" />
+		</path>
+	</target>
+	
+	<target name="test-compile" depends="test-init">
+		<mkdir dir="classes/test/java" />
+		
+		<javac srcdir="src/test/java" destdir="classes/test/java" debug="on" includeAntRuntime="false">
+			<classpath refid="testclasspath" />
+		</javac>
+	</target>
+	
+	<target name="test-run" depends="test-compile">
+		<mkdir dir="junit-reports" />
+		
+		<junit haltonfailure="false" fork="true" forkmode="once">
+			<classpath>
+				<path refid="testclasspath" />
+				<dirset dir="classes/test/java"/>
+			</classpath>
+			<formatter type="xml" />
+			<batchtest todir="junit-reports">
+				<fileset dir="src/test/java" includes="**/Test*.java" />
+			</batchtest>
+		</junit>
+	</target>
+</project>
