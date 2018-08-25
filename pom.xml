@@ -3,8 +3,29 @@
   <groupId>com.narupley</groupId>
   <artifactId>Not-Going-To-Be-Commons-SSL</artifactId>
   <version>0.3.18-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>Not-Going-To-Be-Commons-SSL</name>
   <description>A Java 9+ compliant fork of Not-Yet-Commons-SSL</description>
+  <url>https://github.com/narupley/not-going-to-be-commons-ssl</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Nick Rupley</name>
+      <email>nick.rupley@gmail.com</email>
+      <organization>narupley</organization>
+      <organizationUrl>https://github.com/narupley</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/narupley/not-going-to-be-commons-ssl.git</connection>
+    <developerConnection>scm:git:ssh://github.com:narupley/not-going-to-be-commons-ssl.git</developerConnection>
+    <url>https://github.com/narupley/not-going-to-be-commons-ssl/tree/master</url>
+  </scm>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.jar.name>not-going-to-be-commons-ssl</project.jar.name>
@@ -61,7 +82,7 @@
           <archive>
             <manifestEntries>
               <Implementation-Title>${project.name}</Implementation-Title>
-              <Implementation-URL>https://github.com/narupley/not-going-to-be-commons-ssl</Implementation-URL>
+              <Implementation-URL>${project.url}</Implementation-URL>
               <Implementation-Version>${project.version}</Implementation-Version>
             </manifestEntries>          
           </archive>
@@ -76,7 +97,7 @@
           <archive>
             <manifestEntries>
               <Implementation-Title>${project.name}</Implementation-Title>
-              <Implementation-URL>https://github.com/narupley/not-going-to-be-commons-ssl</Implementation-URL>
+              <Implementation-URL>${project.url}</Implementation-URL>
               <Implementation-Version>${project.version}</Implementation-Version>
             </manifestEntries>          
           </archive>
@@ -99,7 +120,7 @@
           <archive>
             <manifestEntries>
               <Implementation-Title>${project.name}</Implementation-Title>
-              <Implementation-URL>https://github.com/narupley/not-going-to-be-commons-ssl</Implementation-URL>
+              <Implementation-URL>${project.url}</Implementation-URL>
               <Implementation-Version>${project.version}</Implementation-Version>
             </manifestEntries>          
           </archive>
