@@ -2,7 +2,8 @@
 <project name="not-going-to-be-commons-ssl" basedir="." default="dist">
 	
 	<target name="init">
-		<property file="build.properties" />
+		<xmlproperty file="pom.xml" prefix="pom" />
+		<property name="version" value="${pom.project.version}"/>
 
 		<path id="classpath">
 			<fileset dir="lib" includes="**/*.jar" />
