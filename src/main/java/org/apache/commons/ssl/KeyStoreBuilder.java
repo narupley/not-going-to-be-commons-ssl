@@ -27,14 +27,24 @@
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  *
+ *
+ * ----------------------------------------------------------------------
+ *
+ * This file has been modified as part of the Not-Going-To-Be-Commons-SSL
+ * project. The following modifications have been made:
+ * 
+ *     Fixing tryJKS to correctly return null for a potential PKCS12 file
+ *     with no key entry. This happens with cacerts in Java 9+ because of
+ *     the changes in JEP 229, because both JKS and PKCS12 files can now
+ *     be loaded using either the JKS or PKCS12 keystore type.
+ *     Replacing direct System.out calls with Logger calls.
+ *     Removing Bouncy Castle classes and linking to the JAR instead.
+ * 
+ * These modifications are Copyright (c) 2018 Nick Rupley and licensed
+ * under the Apache License, Version 2.0.
  */
 
 package org.apache.commons.ssl;
-
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1EncodableVector;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1Integer;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1Sequence;
-import org.apache.commons.ssl.org.bouncycastle.asn1.DERSequence;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -68,6 +78,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.bouncycastle.asn1.ASN1EncodableVector;
+import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.ASN1Sequence;
+import org.bouncycastle.asn1.DERSequence;
+
 /**
  * Builds Java Key Store files out of pkcs12 files, or out of pkcs8 files +
  * certificate chains.  Also supports OpenSSL style private keys (encrypted or
@@ -80,6 +96,7 @@ import java.util.List;
  */
 public class KeyStoreBuilder {
     private final static String PKCS7_ENCRYPTED = "1.2.840.113549.1.7.6";
+    private final static Logger logger = Logger.getLogger(KeyStoreBuilder.class);
 
     public static KeyStore build(byte[] jksOrCerts, char[] password)
         throws IOException, CertificateException, KeyStoreException,
@@ -493,7 +510,7 @@ public class KeyStoreBuilder {
                     }
                 }
                 if (isPKCS12 && en.hasMoreElements()) {
-                    System.out.println("what kind of weird pkcs12 file has more than one alias?");
+                    logger.debug("what kind of weird pkcs12 file has more than one alias?");
                 }
             }
             if (key == null && uke != null) {
@@ -506,6 +523,14 @@ public class KeyStoreBuilder {
             if (isPKCS12) {
                 // PKCS12 is supposed to be just a key and a chain, anyway.
                 jksKeyStore = null;
+
+                /*
+                 * Java 9+ allows JKS files to be loaded under the PKCS12 type, so a truststore
+                 * without any keypairs could be tested and the key will be null here.
+                 */
+                if (key == null) {
+                    throw new GeneralSecurityException("No key found.");
+                }
             }
 
             List keys = Collections.singletonList(key);

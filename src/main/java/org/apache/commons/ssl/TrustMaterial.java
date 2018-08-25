@@ -27,6 +27,16 @@
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  *
+ *
+ * ----------------------------------------------------------------------
+ *
+ * This file has been modified as part of the Not-Going-To-Be-Commons-SSL
+ * project. The following modifications have been made:
+ * 
+ *     Replacing direct printStackTrace calls with Logger calls.
+ * 
+ * These modifications are Copyright (c) 2018 Nick Rupley and licensed
+ * under the Apache License, Version 2.0.
  */
 
 package org.apache.commons.ssl;
@@ -47,6 +57,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Credit Union Central of British Columbia
  * @author <a href="http://www.cucbc.com/">www.cucbc.com</a>
@@ -54,6 +66,9 @@ import java.util.Iterator;
  * @since 27-Feb-2006
  */
 public class TrustMaterial extends TrustChain {
+
+    private final static Logger logger = Logger.getLogger(TrustMaterial.class);
+
     final static int SIMPLE_TRUST_TYPE_TRUST_ALL = 1;
     final static int SIMPLE_TRUST_TYPE_TRUST_THIS_JVM = 2;
 
@@ -89,7 +104,7 @@ public class TrustMaterial extends TrustChain {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e);
         }
         try {
             File f = new File(pathToJSSECacerts);
@@ -98,7 +113,7 @@ public class TrustMaterial extends TrustChain {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e);
         }
 
         CACERTS = cacerts;

@@ -73,7 +73,7 @@
 	<target name="test-run" depends="test-compile">
 		<mkdir dir="junit-reports" />
 		
-		<junit haltonfailure="false" fork="true" forkmode="once">
+		<junit haltonfailure="false" fork="true" forkmode="perTest">
 			<classpath>
 				<path refid="testclasspath" />
 				<dirset dir="classes/test/java"/>

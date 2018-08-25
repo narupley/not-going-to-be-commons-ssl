@@ -24,16 +24,34 @@ Not-Going-To-Be-Commons-SSL is based off of and contains modified source files
 from Not-Yet-Commons-SSL, which is distributed under the terms of the 
 Apache License, Version 2.0. The following files have been modified:
 
+	File: src/main/java/org/apache/commons/ssl/ASN1Util.java
+    
+    Changes: Removing Bouncy Castle classes and linking to the JAR instead.
+
+
     File: src/main/java/org/apache/commons/ssl/KeyStoreBuilder.java
     
-    Changes: Modifying the order in which keystore types are tested to more
-             gracefully comply with the changes in JEP 229 present in Java 9+.
+    Changes: Fixing tryJKS to correctly return null for a potential PKCS12 file
+    		 with no key entry. This happens with cacerts in Java 9+ because of
+    		 the changes in JEP 229, because both JKS and PKCS12 files can now
+    		 be loaded using either the JKS or PKCS12 keystore type.
              Replacing direct System.out calls with Logger calls.
+             Removing Bouncy Castle classes and linking to the JAR instead.
+
+
+	File: src/main/java/org/apache/commons/ssl/PKCS8Key.java
+    
+    Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
 
     File: src/main/java/org/apache/commons/ssl/TrustMaterial.java
     
     Changes: Replacing direct printStackTrace calls with Logger calls.
+
+
+	Files: src/main/java/org/apache/commons/ssl/org/bouncycastle/*
+	
+	Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
 
 --------------------------------------------------------------------------------

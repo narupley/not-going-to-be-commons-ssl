@@ -27,6 +27,16 @@
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
  *
+ *
+ * ----------------------------------------------------------------------
+ *
+ * This file has been modified as part of the Not-Going-To-Be-Commons-SSL
+ * project. The following modifications have been made:
+ * 
+ *     Removing Bouncy Castle classes and linking to the JAR instead.
+ * 
+ * These modifications are Copyright (c) 2018 Nick Rupley and licensed
+ * under the Apache License, Version 2.0.
  */
 
 package org.apache.commons.ssl;
@@ -69,14 +79,14 @@ import javax.crypto.spec.RC2ParameterSpec;
 import javax.crypto.spec.RC5ParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1Encodable;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1EncodableVector;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1Integer;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import org.apache.commons.ssl.org.bouncycastle.asn1.ASN1OutputStream;
-import org.apache.commons.ssl.org.bouncycastle.asn1.DERNull;
-import org.apache.commons.ssl.org.bouncycastle.asn1.DEROctetString;
-import org.apache.commons.ssl.org.bouncycastle.asn1.DERSequence;
+import org.bouncycastle.asn1.ASN1Encodable;
+import org.bouncycastle.asn1.ASN1EncodableVector;
+import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import org.bouncycastle.asn1.ASN1OutputStream;
+import org.bouncycastle.asn1.DERNull;
+import org.bouncycastle.asn1.DEROctetString;
+import org.bouncycastle.asn1.DERSequence;
 
 /**
  * Utility for decrypting PKCS8 private keys.  Way easier to use than
