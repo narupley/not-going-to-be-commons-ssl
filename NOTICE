@@ -24,7 +24,7 @@ Not-Going-To-Be-Commons-SSL is based off of and contains modified source files
 from Not-Yet-Commons-SSL, which is distributed under the terms of the 
 Apache License, Version 2.0. The following files have been modified:
 
-	File: src/main/java/org/apache/commons/ssl/ASN1Util.java
+    File: src/main/java/org/apache/commons/ssl/ASN1Util.java
     
     Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
@@ -32,14 +32,14 @@ Apache License, Version 2.0. The following files have been modified:
     File: src/main/java/org/apache/commons/ssl/KeyStoreBuilder.java
     
     Changes: Fixing tryJKS to correctly return null for a potential PKCS12 file
-    		 with no key entry. This happens with cacerts in Java 9+ because of
-    		 the changes in JEP 229, because both JKS and PKCS12 files can now
-    		 be loaded using either the JKS or PKCS12 keystore type.
+             with no key entry. This happens with cacerts in Java 9+ because of
+             the changes in JEP 229, because both JKS and PKCS12 files can now
+             be loaded using either the JKS or PKCS12 keystore type.
              Replacing direct System.out calls with Logger calls.
              Removing Bouncy Castle classes and linking to the JAR instead.
 
 
-	File: src/main/java/org/apache/commons/ssl/PKCS8Key.java
+    File: src/main/java/org/apache/commons/ssl/PKCS8Key.java
     
     Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
@@ -49,9 +49,9 @@ Apache License, Version 2.0. The following files have been modified:
     Changes: Replacing direct printStackTrace calls with Logger calls.
 
 
-	Files: src/main/java/org/apache/commons/ssl/org/bouncycastle/*
-	
-	Changes: Removing Bouncy Castle classes and linking to the JAR instead.
+    Files: src/main/java/org/apache/commons/ssl/org/bouncycastle/*
+    
+    Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
 
 --------------------------------------------------------------------------------
@@ -60,11 +60,11 @@ Apache License, Version 2.0. The following files have been modified:
 Not-Going-To-Be-Commons-SSL includes the following, which is distributed
 under the terms of the Apache License, Version 2.0.
 
-	Apache Commons HttpClient 3.0.1
-	Apache Commons Logging 1.2
-	Apache Log4j 1.2.16
-	Byte Buddy 1.8.8
-	Objenesis 2.5.1
+    Apache Commons HttpClient 3.0.1
+    Apache Commons Logging 1.2
+    Apache Log4j 1.2.16
+    Byte Buddy 1.8.8
+    Objenesis 2.5.1
 
 
 --------------------------------------------------------------------------------
