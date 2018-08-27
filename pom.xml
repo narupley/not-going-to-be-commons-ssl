@@ -31,10 +31,6 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
   </distributionManagement>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -175,7 +171,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
+      <!-- <plugin>
       	<groupId>net.ju-n.maven.plugins</groupId>
       	<artifactId>checksum-maven-plugin</artifactId>
       	<version>1.4</version>
@@ -195,7 +191,7 @@
       	    </goals>
       	  </execution>
       	</executions>
-      </plugin>
+      </plugin> -->
       <plugin>
       	<groupId>org.apache.maven.plugins</groupId>
       	<artifactId>maven-gpg-plugin</artifactId>
@@ -219,6 +215,17 @@
       	  	</configuration>
       	  </execution>
       	</executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+        </configuration>
       </plugin>
     </plugins>
   </build>
