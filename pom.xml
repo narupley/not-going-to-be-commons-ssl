@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.narupley</groupId>
   <artifactId>not-going-to-be-commons-ssl</artifactId>
-  <version>0.3.18-SNAPSHOT</version>
+  <version>0.3.19-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Not-Going-To-Be-Commons-SSL</name>
   <description>A Java 9+ compliant fork of Not-Yet-Commons-SSL</description>

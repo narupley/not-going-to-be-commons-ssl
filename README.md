@@ -8,6 +8,18 @@ In the original author's own words, the Not-Yet-Commons-SSL project should be co
 
 ------------
 
+## Maven Dependency
+
+```
+<dependency>
+  <groupId>com.narupley</groupId>
+  <artifactId>not-going-to-be-commons-ssl</artifactId>
+  <version>0.3.18</version>
+</dependency>
+```
+
+------------
+
 ## License
 
 Not-Going-To-Be-Commons-SSL is Copyright © 2018 Nick Rupley and licensed under the Apache License, Version 2.0.
