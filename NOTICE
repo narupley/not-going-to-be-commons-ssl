@@ -44,9 +44,10 @@ Apache License, Version 2.0. The following files have been modified:
     Changes: Removing Bouncy Castle classes and linking to the JAR instead.
 
 
-    File: src/main/java/org/apache/commons/ssl/TrustMaterial.java
+    File: src/main/java/org/apache/commons/ssl/*
     
-    Changes: Replacing direct printStackTrace calls with Logger calls.
+    Changes: Replacing direct printStackTrace calls with Logger calls, remove
+             logging "abstraction".
 
 
     Files: src/main/java/org/apache/commons/ssl/org/bouncycastle/*
@@ -62,7 +63,6 @@ under the terms of the Apache License, Version 2.0.
 
     Apache Commons HttpClient 3.0.1
     Apache Commons Logging 1.2
-    Apache Log4j 1.2.16
     Byte Buddy 1.8.8
     Objenesis 2.5.1
 

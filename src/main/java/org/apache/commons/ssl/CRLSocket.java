@@ -1,6 +1,10 @@
 package org.apache.commons.ssl;
 
 import javax.net.SocketFactory;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,8 +12,10 @@ import java.net.Socket;
 import java.security.GeneralSecurityException;
 
 public class CRLSocket extends SSLClient {
+    private static final Log logger = LogFactory.getLog(CRLSocket.class);
+
     private final static CRLSocket secureInstance;
-    private final static CRLSocket plainInstance;    
+    private final static CRLSocket plainInstance;
 
     static {
         CRLSocket sf1 = null, sf2 = null;
@@ -19,12 +25,11 @@ public class CRLSocket extends SSLClient {
             sf2.setIsSecure(false);
         }
         catch (Exception e) {
-            System.out.println("could not create CRLSocket: " + e);
-            e.printStackTrace();
+            logger.error("could not create CRLSocket", e);
         }
         finally {
             secureInstance = sf1;
-            plainInstance = sf2;            
+            plainInstance = sf2;
         }
     }
 
