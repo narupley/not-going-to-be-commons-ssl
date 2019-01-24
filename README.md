@@ -14,7 +14,7 @@ In the original author's own words, the Not-Yet-Commons-SSL project should be co
 <dependency>
   <groupId>com.narupley</groupId>
   <artifactId>not-going-to-be-commons-ssl</artifactId>
-  <version>0.3.18</version>
+  <version>0.3.19</version>
 </dependency>
 ```
 
