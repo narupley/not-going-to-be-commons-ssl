@@ -90,6 +90,12 @@ public class TrustMaterial extends TrustChain {
      */
     public final static TrustMaterial DEFAULT;
 
+    /**
+     * System property to specify a password used for opening trust stores for CACERTS and
+     * JSSE_CACERTS.
+     */
+    public static final String TRUST_STORE_PASSWORD_PROPERTY = "org.apache.commons.ssl.trustStorePassword";
+
     static {
         JavaImpl.load();
         String javaHome = System.getProperty("java.home");
@@ -97,10 +103,18 @@ public class TrustMaterial extends TrustChain {
         String pathToJSSECacerts = javaHome + "/lib/security/jssecacerts";
         TrustMaterial cacerts = null;
         TrustMaterial jssecacerts = null;
+        String trustStorePasswordProperty = System.getProperty(TRUST_STORE_PASSWORD_PROPERTY);
+        char[] trustStorePassword;
+        if (trustStorePasswordProperty != null) {
+            trustStorePassword = trustStorePasswordProperty.toCharArray();
+        } else {
+            trustStorePassword = null;
+        }
+
         try {
             File f = new File(pathToCacerts);
             if (f.exists()) {
-                cacerts = new TrustMaterial(pathToCacerts);
+                cacerts = new TrustMaterial(pathToCacerts, trustStorePassword);
             }
         }
         catch (Exception e) {
@@ -109,7 +123,7 @@ public class TrustMaterial extends TrustChain {
         try {
             File f = new File(pathToJSSECacerts);
             if (f.exists()) {
-                jssecacerts = new TrustMaterial(pathToJSSECacerts);
+                jssecacerts = new TrustMaterial(pathToJSSECacerts, trustStorePassword);
             }
         }
         catch (Exception e) {
