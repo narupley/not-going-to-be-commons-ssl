@@ -101,42 +101,47 @@ public class TrustMaterial extends TrustChain {
         String javaHome = System.getProperty("java.home");
         String pathToCacerts = javaHome + "/lib/security/cacerts";
         String pathToJSSECacerts = javaHome + "/lib/security/jssecacerts";
-        TrustMaterial cacerts = null;
-        TrustMaterial jssecacerts = null;
-        String trustStorePasswordProperty = System.getProperty(TRUST_STORE_PASSWORD_PROPERTY);
-        char[] trustStorePassword;
-        if (trustStorePasswordProperty != null) {
-            trustStorePassword = trustStorePasswordProperty.toCharArray();
-        } else {
-            trustStorePassword = null;
-        }
-
-        try {
-            File f = new File(pathToCacerts);
-            if (f.exists()) {
-                cacerts = new TrustMaterial(pathToCacerts, trustStorePassword);
-            }
-        }
-        catch (Exception e) {
-            logger.warn(e);
-        }
-        try {
-            File f = new File(pathToJSSECacerts);
-            if (f.exists()) {
-                jssecacerts = new TrustMaterial(pathToJSSECacerts, trustStorePassword);
-            }
-        }
-        catch (Exception e) {
-            logger.warn(e);
-        }
-
-        CACERTS = cacerts;
-        JSSE_CACERTS = jssecacerts;
+        char [] trustStorePassword = getTrustStorePassword();
+        CACERTS = loadCerts(pathToCacerts, trustStorePassword);
+        JSSE_CACERTS = loadCerts(pathToJSSECacerts, trustStorePassword);
         if (JSSE_CACERTS != null) {
             DEFAULT = JSSE_CACERTS;
         } else {
             DEFAULT = CACERTS;
         }
+    }
+
+    /**
+     * Load certificates from trust store.
+     * @param pathToCerts Path to trust store.
+     * @param trustStorePassword Password of the keystore or null.
+     * @return trust material or null, if the certificates could not be loaded.
+     */
+    static TrustMaterial loadCerts(String pathToCerts, char[] trustStorePassword) {
+        TrustMaterial cacerts = null;
+        try {
+            File f = new File(pathToCerts);
+            if (f.exists()) {
+                cacerts = new TrustMaterial(pathToCerts, trustStorePassword);
+            }
+        }
+        catch (Exception e) {
+            logger.warn(e);
+        }
+        return cacerts;
+    }
+
+    /**
+     * Get trust store password from system property {@value #TRUST_STORE_PASSWORD_PROPERTY}
+     * if set.
+     * @return a password set via the system properties or null if no password is specified.
+     */
+    static char[] getTrustStorePassword() {
+        String trustStorePassword = System.getProperty(TRUST_STORE_PASSWORD_PROPERTY);
+        if (trustStorePassword != null) {
+            return trustStorePassword.toCharArray();
+        }
+        return null;
     }
 
     public final static TrustMaterial TRUST_ALL =
