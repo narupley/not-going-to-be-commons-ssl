@@ -32,14 +32,14 @@
  *
  * This file has been modified as part of the Not-Going-To-Be-Commons-SSL
  * project. The following modifications have been made:
- * 
+ *
  *     Fixing tryJKS to correctly return null for a potential PKCS12 file
  *     with no key entry. This happens with cacerts in Java 9+ because of
  *     the changes in JEP 229, because both JKS and PKCS12 files can now
  *     be loaded using either the JKS or PKCS12 keystore type.
  *     Replacing direct System.out calls with Logger calls.
  *     Removing Bouncy Castle classes and linking to the JAR instead.
- * 
+ *
  * These modifications are Copyright (c) 2018 Nick Rupley and licensed
  * under the Apache License, Version 2.0.
  */
@@ -78,7 +78,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.bouncycastle.asn1.ASN1EncodableVector;
 import org.bouncycastle.asn1.ASN1Integer;
 import org.bouncycastle.asn1.ASN1Sequence;
@@ -96,7 +97,7 @@ import org.bouncycastle.asn1.DERSequence;
  */
 public class KeyStoreBuilder {
     private final static String PKCS7_ENCRYPTED = "1.2.840.113549.1.7.6";
-    private final static Logger logger = Logger.getLogger(KeyStoreBuilder.class);
+    private static final Log logger = LogFactory.getLog(KeyStoreBuilder.class);
 
     public static KeyStore build(byte[] jksOrCerts, char[] password)
         throws IOException, CertificateException, KeyStoreException,
@@ -151,7 +152,7 @@ public class KeyStoreBuilder {
         }
 
         List keys = br1.keys;
-        List chains = br1.chains;        
+        List chains = br1.chains;
         boolean atLeastOneNotSet = keys == null || chains == null || keys.isEmpty() || chains.isEmpty();
         if (atLeastOneNotSet && br2 != null) {
             if (br2.keys != null && !br2.keys.isEmpty()) {
@@ -504,7 +505,7 @@ public class KeyStoreBuilder {
                             break;
                         }
                     } catch (UnrecoverableKeyException e) {
-                        uke = e;  // We might throw this one later. 
+                        uke = e;  // We might throw this one later.
                     } catch (GeneralSecurityException gse) {
                         // Swallow... keep looping.
                     }

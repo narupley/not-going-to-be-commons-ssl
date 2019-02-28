@@ -37,6 +37,10 @@ import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLProtocolException;
 import javax.net.ssl.SSLSocket;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -101,7 +105,7 @@ import java.util.TreeSet;
  */
 public class RMISocketFactoryImpl extends RMISocketFactory {
     public final static String RMI_HOSTNAME_KEY = "java.rmi.server.hostname";
-    private final static LogWrapper log = LogWrapper.getLogger(RMISocketFactoryImpl.class);
+    private final static Log log = LogFactory.getLog(RMISocketFactoryImpl.class);
 
     private volatile SocketFactory defaultClient;
     private volatile ServerSocketFactory sslServer;

@@ -39,6 +39,9 @@ import javax.naming.ldap.LdapName;
 import javax.naming.ldap.Rdn;
 import javax.security.auth.x500.X500Principal;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.math.BigInteger;
@@ -60,6 +63,7 @@ import java.lang.reflect.Method;
  * @since 19-Aug-2005
  */
 public class Certificates {
+    private static final Log logger = LogFactory.getLog(Certificates.class);
 
     public final static CertificateFactory CF;
     public final static String LINE_ENDING = System.getProperty("line.separator");
@@ -143,7 +147,7 @@ public class Certificates {
             cf = CertificateFactory.getInstance("X.509");
         }
         catch (CertificateException ce) {
-            ce.printStackTrace(System.out);
+            logger.error("certificate exception", ce);
         }
         finally {
             CF = cf;
@@ -520,8 +524,7 @@ public class Certificates {
             c = cert.getSubjectAlternativeNames();
         }
         catch (CertificateParsingException cpe) {
-            // Should probably log.debug() this?
-            cpe.printStackTrace();
+            logger.debug ("could not parse certificate", cpe);
         }
         if (c != null) {
             Iterator it = c.iterator();

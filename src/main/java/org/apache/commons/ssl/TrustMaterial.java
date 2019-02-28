@@ -32,9 +32,9 @@
  *
  * This file has been modified as part of the Not-Going-To-Be-Commons-SSL
  * project. The following modifications have been made:
- * 
+ *
  *     Replacing direct printStackTrace calls with Logger calls.
- * 
+ *
  * These modifications are Copyright (c) 2018 Nick Rupley and licensed
  * under the Apache License, Version 2.0.
  */
@@ -57,7 +57,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Credit Union Central of British Columbia
@@ -67,7 +68,7 @@ import org.apache.log4j.Logger;
  */
 public class TrustMaterial extends TrustChain {
 
-    private final static Logger logger = Logger.getLogger(TrustMaterial.class);
+    private static final Log logger = LogFactory.getLog(TrustMaterial.class);
 
     final static int SIMPLE_TRUST_TYPE_TRUST_ALL = 1;
     final static int SIMPLE_TRUST_TYPE_TRUST_THIS_JVM = 2;

@@ -2,10 +2,7 @@ package org.apache.commons.ssl;
 
 import static org.apache.commons.ssl.JUnitConfig.TEST_HOME;
 
-import org.apache.log4j.BasicConfigurator;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -15,21 +12,11 @@ import java.security.GeneralSecurityException;
 import java.security.KeyStoreException;
 
 public class TestTrustMaterial {
-
+ 
     private static final String TRUST_STORE_PASSWORD = "changeit";
     private static final String NON_EXISTENT_FILENAME = "DOES_NOT_EXIST";
     File pemFile = new File(TEST_HOME + "samples/x509/certificate.pem");
     File derFile = new File(TEST_HOME + "samples/x509/certificate.der");
-
-    @BeforeClass
-    public static void initLogging() {
-        BasicConfigurator.configure();
-    }
-
-    @AfterClass
-    public static void tearDownLogging() {
-        BasicConfigurator.resetConfiguration();
-    }
 
     @Test
     public void theTest() throws GeneralSecurityException, IOException {

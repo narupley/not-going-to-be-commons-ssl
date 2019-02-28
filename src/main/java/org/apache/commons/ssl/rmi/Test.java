@@ -31,7 +31,8 @@
 
 package org.apache.commons.ssl.rmi;
 
-import org.apache.commons.ssl.LogWrapper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.ssl.RMISocketFactoryImpl;
 
 import java.net.MalformedURLException;
@@ -49,7 +50,7 @@ import java.rmi.server.RMISocketFactory;
  * @since 22-Feb-2007
  */
 public class Test {
-    private final static LogWrapper log = LogWrapper.getLogger(Test.class);
+    private final static Log log = LogFactory.getLog(Test.class);
     private final static String TEST_DATE_NAME = "/org.apache.commons.ssl.rmi.testdate";
     private final static String TEST_INT_NAME = "/org.apache.commons.ssl.rmi.testint";
     protected final static int PORT;
@@ -146,7 +147,6 @@ public class Test {
                 return;
             }
             catch (Exception e2) {
-                e2.printStackTrace();
                 log.error(e2.getMessage(), e2);
             }
 
@@ -165,7 +165,6 @@ public class Test {
         }
         catch (Exception problem) {
             // bah - no luck
-            problem.printStackTrace();
             log.warn(problem, problem);
         }
     }

@@ -152,11 +152,6 @@
               <artifactId>commons-logging</artifactId>
               <version>1.2</version>
             </additionalDependency>
-            <additionalDependency>
-              <groupId>log4j</groupId>
-              <artifactId>log4j</artifactId>
-              <version>1.2.17</version>
-            </additionalDependency>
           </additionalDependencies>
         </configuration>
         <executions>
@@ -249,11 +244,6 @@
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
     </dependency>
     <dependency>
       <groupId>net.bytebuddy</groupId>

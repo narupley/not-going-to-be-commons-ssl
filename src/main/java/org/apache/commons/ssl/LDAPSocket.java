@@ -32,6 +32,10 @@
 package org.apache.commons.ssl;
 
 import javax.net.SocketFactory;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
@@ -42,6 +46,8 @@ import java.security.GeneralSecurityException;
  * @since 28-Feb-2006
  */
 public class LDAPSocket extends SSLClient {
+    private static final Log logger = LogFactory.getLog(LDAPSocket.class);
+
     private final static LDAPSocket instance;
 
     static {
@@ -50,8 +56,7 @@ public class LDAPSocket extends SSLClient {
             sf = new LDAPSocket();
         }
         catch (Exception e) {
-            System.out.println("could not create LDAPSocket: " + e);
-            e.printStackTrace();
+            logger.error("could not create LDAPSocket.", e);
         }
         finally {
             instance = sf;

@@ -31,6 +31,8 @@
 
 package org.apache.commons.ssl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -53,7 +55,7 @@ import java.util.TreeMap;
  * @since 22-Feb-2007
  */
 public class TomcatServerXML {
-    private final static LogWrapper log = LogWrapper.getLogger(TomcatServerXML.class);
+    private final static Log log = LogFactory.getLog(TomcatServerXML.class);
 
     /**
      * KeyMaterial extracted from Tomcat's conf/server.xml.  There might be

@@ -46,6 +46,10 @@ import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -72,6 +76,8 @@ import java.security.cert.X509Certificate;
  * @since 30-Jun-2006
  */
 public final class Java13 extends JavaImpl {
+    private static final Log logger = LogFactory.getLog(Java13.class);
+
     private final static Java13 instance = new Java13();
 
     private Java13() {
@@ -87,11 +93,9 @@ public final class Java13 extends JavaImpl {
                 Class c = Class.forName("com.sun.crypto.provider.SunJCE");
                 Security.addProvider((Provider) c.newInstance());
                 // System.out.println( "jce not loaded: " + e + " - loading SunJCE!" );
-                //e.printStackTrace( System.out );
             }
             catch (Exception e2) {
-                System.out.println("com.sun.crypto.provider.SunJCE unavailable: " + e2);
-                // e2.printStackTrace( System.out );
+                logger.error("com.sun.crypto.provider.SunJCE unavailable.", e2);
             }
         }
         try {
@@ -99,7 +103,7 @@ public final class Java13 extends JavaImpl {
             u.openConnection();
         }
         catch (Exception e) {
-            // System.out.println( "java.net.URL support of https not loaded: " + e + " - attempting to load com.sun.net.ssl.internal.ssl.Provider!" );
+            logger.error("java.net.URL support of https not loaded - attempting to load com.sun.net.ssl.internal.ssl.Provider!", e);
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
         }
@@ -222,7 +226,7 @@ public final class Java13 extends JavaImpl {
         ssl.doPostConnectSocketStuff(s, remoteHost);
         return s;
     }
-    
+
     protected final Socket connectSocket(Socket s, SocketFactory sf,
                                          String remoteHost, int remotePort,
                                          InetAddress localHost, int localPort,

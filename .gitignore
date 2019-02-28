@@ -8,3 +8,8 @@
 /TEMP-INF
 /target/
 /settings.xml
+
+# Eclispe
+/.classpath
+/.project
+/.settings/
