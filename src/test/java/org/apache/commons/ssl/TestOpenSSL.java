@@ -124,7 +124,7 @@ public class TestOpenSSL {
                     try {
                         byte[] result = OpenSSL.decrypt(cipher, pwd, encrypted);
                         String s = new String(result, "ISO-8859-1");
-                        assertTrue(cipherPadded + "." + filePadded + " decrypts to 'Hello World!'", "Hello World!".equals(s));
+                        assertEquals(cipherPadded + "." + filePadded + " decrypts to 'Hello World!'", "Hello World!", s);
                         return 1;
                     } catch (NoSuchAlgorithmException nsae) {
                         System.out.println("Warn: " + cipherPadded + filePadded + " NoSuchAlgorithmException");
