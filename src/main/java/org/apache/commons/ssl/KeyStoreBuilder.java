@@ -564,6 +564,13 @@ public class KeyStoreBuilder {
             // swallow it, return null.
             return null;
         }
+        catch (NullPointerException npe) {
+            String msg = npe.getMessage() != null ? npe.getMessage() : "";
+            if (msg.equals("No password supplied for PKCS#12 KeyStore.")) {
+                return null;
+            }
+            throw npe;
+        }
     }
 
     private static X509Certificate[] toChain(Collection certs) {
